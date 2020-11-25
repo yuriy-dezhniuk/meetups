@@ -5,19 +5,17 @@
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md4>
             <v-card class="elevation-12">
-                <h1 class="font-weight-light text-center pt-4">Sign Up</h1>
-                <p class="text-center">Already have an account, please
-                  <router-link to="/signin">Sign In</router-link>
+                <h1 class="font-weight-light text-center pt-4">Sign In</h1>
+                <p class="text-center">Don’t have an account, please
+                  <router-link to="/signup">Sign Up</router-link>
                 </p>
               <v-card-text>
                 <v-form>
-                  <!-- prepend-icon="mdi-email" -->
                   <v-text-field
-                    name="email"
                     label="E-mail*"
-                    color="dark lighten-1"
+                    required
                     class="ma-2"
-                    type="text"
+                    color="dark lighten-1"
                     v-model="userEmail"
                   ></v-text-field>
                   <v-text-field
@@ -29,15 +27,6 @@
                     color="dark lighten-1"
                     v-model="userPassword"
                   ></v-text-field>
-                  <v-text-field
-                    id="confirm-password"
-                    name="confirm-password"
-                    label="Confirm Password*"
-                    type="password"
-                    class="ma-2"
-                    color="dark lighten-1"
-                    v-model="userPasswordConfirm"
-                  ></v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions class="d-flex pb-6">
@@ -45,8 +34,8 @@
                 <v-btn
                   type="submit"
                   color="dark lighten-1"
-                  @click="signUp"
-                >Sign Up</v-btn>
+                  @click="signIn"
+                >Sign In</v-btn>
                 <v-spacer></v-spacer>
               </v-card-actions>
             </v-card>
@@ -65,18 +54,16 @@ export default {
   data: () => ({
     userEmail: '',
     userPassword: '',
-    userPasswordConfirm: '',
   }),
   methods: {
-    signUp() {
-      if (!emailRegExp.test(this.userEmail)) {
+    signIn() {
+      const userEmail = this.userEmail.trim();
+      if (!emailRegExp.test(userEmail)) {
         alert('Email address is invalid');
-      } else if (!this.userPassword.trim()) {
+      } else if (!this.userPassword) {
         alert('Fields cannot be empty');
-      } else if (this.userPassword !== this.userPasswordConfirm) {
-        alert('Passwords do not match');
       } else {
-        alert('Sign Up is successful');
+        alert('Sign In is successful');
       }
     },
   },
