@@ -1,20 +1,22 @@
 <template>
   <v-app>
+    <toolbar/>
     <v-main>
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md4>
             <v-card class="elevation-12">
-                <h1 class="font-weight-light text-center pt-4">Sign Up</h1>
-                <p class="text-center">Already have an account, please
-                  <router-link to="/signin">Sign In</router-link>
-                </p>
+              <h1 class="font-weight-light text-center pt-4">Sign Up</h1>
+              <p class="text-center">Already have an account, please
+                <router-link to="/signin">Sign In</router-link>
+              </p>
               <v-card-text>
                 <v-form>
                   <!-- prepend-icon="mdi-email" -->
                   <v-text-field
                     name="email"
                     label="E-mail*"
+                    prepend-icon="mdi-email"
                     color="dark lighten-1"
                     class="ma-2"
                     type="text"
@@ -24,6 +26,8 @@
                     id="password"
                     name="password"
                     label="Password*"
+                    required
+                    prepend-icon="lock"
                     type="password"
                     class="ma-2"
                     color="dark lighten-1"
@@ -33,6 +37,8 @@
                     id="confirm-password"
                     name="confirm-password"
                     label="Confirm Password*"
+                    required
+                    prepend-icon="lock"
                     type="password"
                     class="ma-2"
                     color="dark lighten-1"
@@ -59,6 +65,7 @@
 
 <script>
 import emailRegExp from '../helpers/emailRegExp.vue';
+import toolbar from '../components/toolbar.vue';
 
 export default {
   name: 'Signup',
@@ -67,6 +74,9 @@ export default {
     userPassword: '',
     userPasswordConfirm: '',
   }),
+  components: {
+    toolbar,
+  },
   methods: {
     signUp() {
       if (!emailRegExp.test(this.userEmail)) {

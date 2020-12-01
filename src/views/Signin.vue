@@ -13,6 +13,7 @@
                 <v-form>
                   <v-text-field
                     label="E-mail*"
+                    prepend-icon="mdi-email"
                     required
                     class="ma-2"
                     color="dark lighten-1"
@@ -22,6 +23,8 @@
                     id="password"
                     name="password"
                     label="Password*"
+                    required
+                    prepend-icon="lock"
                     type="password"
                     class="ma-2"
                     color="dark lighten-1"
