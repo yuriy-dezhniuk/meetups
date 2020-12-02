@@ -1,7 +1,7 @@
 <template>
   <v-app>
-    <toolbar/>
     <v-main>
+      <toolbar/>
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md4>
@@ -12,7 +12,6 @@
               </p>
               <v-card-text>
                 <v-form>
-                  <!-- prepend-icon="mdi-email" -->
                   <v-text-field
                     name="email"
                     label="E-mail*"

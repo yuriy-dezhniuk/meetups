@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <toolbar/>
     <v-main>
       <v-container fluid fill-height>
         <v-layout align-center justify-center>
@@ -51,6 +52,7 @@
 
 <script>
 import emailRegExp from '../helpers/emailRegExp.vue';
+import toolbar from '../components/toolbar.vue';
 
 export default {
   name: 'Signup',
@@ -58,6 +60,9 @@ export default {
     userEmail: '',
     userPassword: '',
   }),
+  components: {
+    toolbar,
+  },
   methods: {
     signIn() {
       const userEmail = this.userEmail.trim();

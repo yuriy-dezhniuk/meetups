@@ -1,13 +1,18 @@
 <template>
-  <div>
+  <v-app>
+    <toolbar/>
     <h1>Profile</h1>
-  </div>
+  </v-app>
 </template>
 
 <script>
 // @ is an alias to /src
+import toolbar from '../components/toolbar.vue';
 
 export default {
   name: 'Profile',
+  components: {
+    toolbar,
+  },
 };
 </script>
