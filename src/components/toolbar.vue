@@ -20,7 +20,7 @@
         :nudge-top="$vuetify.breakpoint.smAndDown?-52:-12"
         min-width="100%">
           <v-row
-            :class="toggleMenu ? 'white': 'transparent'"
+            :class="this.$vuetify.breakpoint.mdAndUp ? 'transparent' : 'white'"
             class="d-flex flex-column flex-md-row justify-end">
             <v-btn
               color="transparent"
