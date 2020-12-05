@@ -27,7 +27,7 @@ export default {
         {
           icon: 'location_on',
           title: 'ORGANIZE MEETUP',
-          route: '/createmeetups',
+          route: '/createmeetup',
         },
         {
           icon: 'person',
