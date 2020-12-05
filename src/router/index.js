@@ -1,16 +1,19 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
-import Signup from '../views/Signup.vue';
-import Signin from '../views/Signin.vue';
+import Meetups from '@/views/Meetups.vue';
+import Signup from '@/views/Signup.vue';
+import Signin from '@/views/Signin.vue';
+import CreateMeetup from '@/views/CreateMeetup.vue';
+import ViewMeetups from '@/views/ViewMeetups.vue';
+import Profile from '@/views/Profile.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    name: 'Meetups',
+    component: Meetups,
   },
   {
     path: '/signup',
@@ -21,6 +24,21 @@ const routes = [
     path: '/signin',
     name: 'Signin',
     component: Signin,
+  },
+  {
+    path: '/createmeetup',
+    name: 'CreateMeetup',
+    component: CreateMeetup,
+  },
+  {
+    path: '/meetups',
+    name: 'ViewMeetups',
+    component: ViewMeetups,
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
   },
 ];
 
