@@ -5,7 +5,6 @@
     height="500"
     style="max-width: 1200px;"
     show-arrows-on-hover
-    hide-delimiter-background
   >
     <v-carousel-item
       v-for="(slide, i) in slides"

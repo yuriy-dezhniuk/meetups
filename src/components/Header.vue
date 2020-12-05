@@ -1,16 +1,16 @@
 <template>
-    <v-app-bar app>
-      <router-link to="/" tag="span" style="cursor:pointer">
-      <v-toolbar-title v-text="'Meetups'"></v-toolbar-title>
-      </router-link>
-      <v-spacer></v-spacer>
-      <v-toolbar-items>
-        <v-btn link text v-for="(item, i) in menyBtns" v-bind:key="i" v-bind:to="item.route">
-          <v-icon left v-html="item.icon"></v-icon>
-          {{item.title}}
-        </v-btn>
-      </v-toolbar-items>
-    </v-app-bar>
+  <v-app-bar app>
+    <router-link to="/" tag="span" style="cursor:pointer">
+    <v-toolbar-title v-text="'Meetups'"></v-toolbar-title>
+    </router-link>
+    <v-spacer></v-spacer>
+    <v-toolbar-items>
+      <v-btn link text v-for="(item, i) in menyBtns" v-bind:key="i" v-bind:to="item.route">
+        <v-icon left v-html="item.icon"></v-icon>
+        {{item.title}}
+      </v-btn>
+    </v-toolbar-items>
+  </v-app-bar>
 </template>
 
 <script>

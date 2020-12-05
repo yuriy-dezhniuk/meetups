@@ -5,13 +5,13 @@
         elevation="3"
         x-large
         class="ma-5"
-        @click="navigateToPage('/meetups')"
+        to="/meetups"
       >EXPLORE MEETUPS</v-btn>
       <v-btn
         elevation="3"
         x-large
         class="ma-5"
-        @click="navigateToPage('/createmeetup')"
+        to="/createmeetup"
       >ORGANIZE MEETUP</v-btn>
     </div>
     <Carousel/>
@@ -28,11 +28,6 @@ export default {
   }),
   components: {
     Carousel,
-  },
-  methods: {
-    navigateToPage(path) {
-      if (this.$route.path !== path) this.$router.push(path);
-    },
   },
 };
 </script>
