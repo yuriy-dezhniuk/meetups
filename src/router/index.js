@@ -1,11 +1,11 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Meetups from '../views/Meetups.vue';
-import Signup from '../views/Signup.vue';
-import Signin from '../views/Signin.vue';
-import CreateMeetup from '../views/CreateMeetup.vue';
-import ViewMeetups from '../views/ViewMeetups.vue';
-import Profile from '../views/Profile.vue';
+import Meetups from '@/views/Meetups.vue';
+import Signup from '@/views/Signup.vue';
+import Signin from '@/views/Signin.vue';
+import CreateMeetup from '@/views/CreateMeetup.vue';
+import ViewMeetups from '@/views/ViewMeetups.vue';
+import Profile from '@/views/Profile.vue';
 
 Vue.use(VueRouter);
 
