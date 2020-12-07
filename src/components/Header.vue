@@ -27,7 +27,7 @@ export default {
         {
           icon: 'location_on',
           title: 'ORGANIZE MEETUP',
-          route: '/createmeetups',
+          route: '/createmeetup',
         },
         {
           icon: 'person',
@@ -44,7 +44,24 @@ export default {
           title: 'SIGN IN',
           route: '/signin',
         },
+        {
+          icon: 'login',
+          title: 'LOGOUT',
+          route: this.logOutPath,
+        },
       ];
+    },
+    logOutPath() {
+      let path;
+      if (
+        this.$route.path === '/createmeetup'
+        || this.$route.path === '/profile'
+      ) {
+        path = '/';
+      } else {
+        path = this.$route.path;
+      }
+      return path;
     },
   },
 };
