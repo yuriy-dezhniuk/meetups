@@ -81,7 +81,6 @@
       class="mt-10 mb-10"
       @click="createMeetup()"
     >CREATE MEETUP</v-btn>
-
   </v-form>
 </template>
 
