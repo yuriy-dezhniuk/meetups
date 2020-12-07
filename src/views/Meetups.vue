@@ -1,6 +1,9 @@
 <template>
   <v-row class="d-flex justify-center">
-    <div class="text-center">
+    <div
+      class="text-center"
+      style="width: 100%"
+    >
       <v-btn
         elevation="3"
         x-large

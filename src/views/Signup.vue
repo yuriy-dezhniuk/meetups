@@ -77,6 +77,10 @@ export default {
         alert('Passwords do not match');
       } else {
         alert('Sign Up is successful');
+        this.$store.dispatch('signUserUp', {
+          email: this.userEmail,
+          password: this.userPassword,
+        });
       }
     },
   },
