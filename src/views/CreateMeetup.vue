@@ -2,6 +2,7 @@
   <v-form
     class="mx-auto"
     style="max-width: 600px"
+    @submit.prevent="createMeetup"
   >
     <h2 class="pt-5 grey--text text--lighten-1 font-weight-regular">
       Create a new Meetup
@@ -37,7 +38,8 @@
       @change="onFileChanged"
     >
     <v-img
-      :src="imgUrl"
+      v-if="selectedImg.img"
+      :src="selectedImg.url"
       max-width="300"
       max-height="300"
       class="rounded"
@@ -57,7 +59,7 @@
 
     <v-date-picker
       v-model="meetupData"
-      :allowed-dates="allowedDates"
+      :min="nowDate"
       class="ma-1"
       width="285"
       elevation="3"
@@ -79,7 +81,7 @@
     <v-btn
       color="dark"
       class="mt-10 mb-10"
-      @click="createMeetup()"
+      type="submit"
     >CREATE MEETUP</v-btn>
 
   </v-form>
@@ -95,33 +97,33 @@ export default {
     location: '',
     selectedImg: {
       img: null,
+      url: '',
       isSelecting: false,
     },
     description: '',
     meetupData: '',
     meetupTime: '09:00',
+    nowDate: new Date().toISOString().slice(0, 10),
   }),
-  computed: {
-    imgUrl() {
-      return this.selectedImg.img
-        ? URL.createObjectURL(this.selectedImg.img) : '#';
-    },
+  created() {
+    this.getDefaultMeetupDay();
   },
   methods: {
     onUploadImgBtnClick() {
       this.selectedImg.isSelecting = true;
-      window.addEventListener('focus', () => {
-        this.selectedImg.isSelecting = false;
-      }, { once: true });
       this.$refs.uploader.click();
+      this.selectedImg.isSelecting = false;
     },
     onFileChanged(e) {
       [this.selectedImg.img] = e.target.files;
       // do something
+      if (this.selectedImg.img) {
+        this.selectedImg.url = URL.createObjectURL(this.selectedImg.img);
+      }
     },
     getDefaultMeetupDay() {
       const today = new Date();
-      const tomorrow = new Date(today.getTime() + (24 * 60 * 60 * 1000))
+      const tomorrow = new Date(today.setDate(today.getDate() + 1))
         .toISOString().substr(0, 10);
       this.meetupData = tomorrow;
     },
@@ -137,12 +139,6 @@ export default {
         alert('Meetup is created');
       }
     },
-    allowedDates(day) {
-      return (Date.parse(day) + 1) >= new Date();
-    },
-  },
-  created() {
-    this.getDefaultMeetupDay();
   },
 };
 </script>
