@@ -5,7 +5,14 @@
     </router-link>
     <v-spacer></v-spacer>
     <v-toolbar-items>
-      <v-btn link text v-for="(item, i) in menyBtns" v-bind:key="i" v-bind:to="item.route">
+      <v-btn
+        link
+        text
+        v-for="(item, i) in menyBtns"
+        v-bind:key="i"
+        v-bind:to="item.route"
+        @click="item.click"
+      >
         <v-icon left v-html="item.icon"></v-icon>
         {{item.title}}
       </v-btn>
@@ -23,28 +30,51 @@ export default {
           icon: 'supervisor_account',
           title: 'VIEW MEETUPS',
           route: '/meetups',
+          click: () => null,
         },
         {
           icon: 'location_on',
           title: 'ORGANIZE MEETUP',
-          route: '/createmeetups',
+          route: '/createmeetup',
+          click: () => null,
         },
         {
           icon: 'person',
           title: 'PROFILE',
           route: '/profile',
+          click: () => null,
         },
         {
           icon: 'face',
           title: 'SIGN UP',
           route: '/signup',
+          click: () => null,
         },
         {
           icon: 'lock_open',
           title: 'SIGN IN',
           route: '/signin',
+          click: () => null,
+        },
+        {
+          icon: 'login',
+          title: 'LOGOUT',
+          route: this.logOutPath,
+          click: () => this.$store.dispatch('logout'),
         },
       ];
+    },
+    logOutPath() {
+      let path;
+      if (
+        this.$route.path === '/createmeetup'
+        || this.$route.path === '/profile'
+      ) {
+        path = '/';
+      } else {
+        path = this.$route.path;
+      }
+      return path;
     },
   },
 };
