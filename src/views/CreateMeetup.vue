@@ -83,7 +83,6 @@
       class="mt-10 mb-10"
       type="submit"
     >CREATE MEETUP</v-btn>
-
   </v-form>
 </template>
 
