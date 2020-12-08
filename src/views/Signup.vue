@@ -67,6 +67,18 @@ export default {
     userPassword: '',
     userPasswordConfirm: '',
   }),
+  computed: {
+    user() {
+      return this.$store.state.user;
+    },
+  },
+  watch: {
+    user(value) {
+      if (value) {
+        this.$router.push('/');
+      }
+    },
+  },
   methods: {
     signUp() {
       if (!emailRegExp.test(this.userEmail)) {
@@ -76,7 +88,10 @@ export default {
       } else if (this.userPassword !== this.userPasswordConfirm) {
         alert('Passwords do not match');
       } else {
-        alert('Sign Up is successful');
+        this.$store.dispatch('signUserUp', {
+          email: this.userEmail,
+          password: this.userPassword,
+        }).catch((err) => alert(err.message));
       }
     },
   },

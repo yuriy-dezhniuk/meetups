@@ -49,11 +49,23 @@
 import emailRegExp from '../helpers/emailRegExp.vue';
 
 export default {
-  name: 'Signup',
+  name: 'Signin',
   data: () => ({
     userEmail: '',
     userPassword: '',
   }),
+  computed: {
+    user() {
+      return this.$store.state.user;
+    },
+  },
+  watch: {
+    user(value) {
+      if (value) {
+        this.$router.push('/');
+      }
+    },
+  },
   methods: {
     signIn() {
       const userEmail = this.userEmail.trim();
@@ -62,7 +74,10 @@ export default {
       } else if (!this.userPassword) {
         alert('Fields cannot be empty');
       } else {
-        alert('Sign In is successful');
+        this.$store.dispatch('signUserIn', {
+          email: userEmail,
+          password: this.userPassword,
+        }).catch((err) => alert(err.message));
       }
     },
   },

@@ -19,6 +19,14 @@ new Vue({
       messagingSenderId: '869079010997',
       appId: '1:869079010997:web:29812feb11911d47f6b8fc',
     });
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.$store.dispatch('autoSignIn', user);
+      } else {
+        this.$store.commit('resetStore');
+      }
+    });
+    window.firebase = firebase;
   },
   router,
   store,
