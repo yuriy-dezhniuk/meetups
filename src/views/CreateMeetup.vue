@@ -25,7 +25,6 @@
     <v-btn
       color="dark lighten-1"
       class="text-none mb-5"
-      :loading="selectedImg.isSelecting"
       @click="onUploadImgBtnClick()"
     >
       UPLOAD IMAGE
@@ -58,8 +57,8 @@
     </h2>
 
     <v-date-picker
-      v-model="meetupData"
-      :min="nowDate"
+      v-model="meetupDate"
+      :min="getTomorrowDay()"
       class="ma-1"
       width="285"
       elevation="3"
@@ -97,21 +96,17 @@ export default {
     selectedImg: {
       img: null,
       url: '',
-      isSelecting: false,
     },
     description: '',
-    meetupData: '',
+    meetupDate: '',
     meetupTime: '09:00',
-    nowDate: new Date().toISOString().slice(0, 10),
   }),
   created() {
     this.getDefaultMeetupDay();
   },
   methods: {
     onUploadImgBtnClick() {
-      this.selectedImg.isSelecting = true;
       this.$refs.uploader.click();
-      this.selectedImg.isSelecting = false;
     },
     onFileChanged(e) {
       [this.selectedImg.img] = e.target.files;
@@ -120,11 +115,13 @@ export default {
         this.selectedImg.url = URL.createObjectURL(this.selectedImg.img);
       }
     },
+    getTomorrowDay() {
+      const tomorrow = new Date();
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      return tomorrow.toISOString().substr(0, 10);
+    },
     getDefaultMeetupDay() {
-      const today = new Date();
-      const tomorrow = new Date(today.setDate(today.getDate() + 1))
-        .toISOString().substr(0, 10);
-      this.meetupData = tomorrow;
+      this.meetupDate = this.getTomorrowDay();
     },
     createMeetup() {
       if (
