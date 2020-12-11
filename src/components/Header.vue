@@ -5,9 +5,21 @@
     </router-link>
     <v-spacer></v-spacer>
     <v-toolbar-items>
-      <v-btn link text v-for="(item, i) in menyBtns" v-bind:key="i" v-bind:to="item.route">
+      <v-btn
+        link
+        text
+        v-for="(item, i) in menyBtns"
+        v-bind:key="i"
+        v-bind:to="item.route"
+      >
         <v-icon left v-html="item.icon"></v-icon>
         {{item.title}}
+      </v-btn>
+      <v-btn link text v-if="user" @click="logUserOut">
+        <v-icon>
+          login
+        </v-icon>
+        LOGOUT
       </v-btn>
     </v-toolbar-items>
   </v-app-bar>
@@ -27,7 +39,7 @@ export default {
         {
           icon: 'location_on',
           title: 'ORGANIZE MEETUP',
-          route: '/createmeetups',
+          route: '/createmeetup',
         },
         {
           icon: 'person',
@@ -44,7 +56,42 @@ export default {
           title: 'SIGN IN',
           route: '/signin',
         },
+        // {
+        //   icon: 'login',
+        //   title: 'LOGOUT',
+        //   route: this.logOutPath,
+        //   // click: () => this.$store.dispatch('logout'),
+        // },
       ];
+    },
+    user() {
+      return this.$store.state.user;
+    },
+    // logUserOut() {
+    //   let path;
+    //   if (
+    //     this.$route.path === '/createmeetup'
+    //     || this.$route.path === '/profile'
+    //   ) {
+    //     path = '/';
+    //   } else {
+    //     path = this.$route.path;
+    //   }
+    //   return path;
+    // },
+  },
+  methods: {
+    logUserOut() {
+      if (
+        this.$route.path === '/createmeetup'
+        || this.$route.path === '/profile'
+      ) {
+        this.$store.dispatch('logout');
+        this.$router.push('/');
+      } else {
+        this.$store.dispatch('logout');
+        this.$router.push(this.$route.path);
+      }
     },
   },
 };
