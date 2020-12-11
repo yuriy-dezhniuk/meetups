@@ -8,7 +8,7 @@
       <v-btn
         link
         text
-        v-for="(item, i) in menyBtns"
+        v-for="(item, i) in userStateNavigation"
         v-bind:key="i"
         v-bind:to="item.route"
       >
@@ -35,50 +35,51 @@ export default {
           icon: 'supervisor_account',
           title: 'VIEW MEETUPS',
           route: '/meetups',
+          registered: true,
+          guest: true,
         },
         {
           icon: 'location_on',
           title: 'ORGANIZE MEETUP',
           route: '/createmeetup',
+          registered: true,
+          guest: false,
         },
         {
           icon: 'person',
           title: 'PROFILE',
           route: '/profile',
+          registered: true,
+          guest: false,
         },
         {
           icon: 'face',
           title: 'SIGN UP',
           route: '/signup',
+          registered: false,
+          guest: true,
         },
         {
           icon: 'lock_open',
           title: 'SIGN IN',
           route: '/signin',
+          registered: false,
+          guest: true,
         },
-        // {
-        //   icon: 'login',
-        //   title: 'LOGOUT',
-        //   route: this.logOutPath,
-        //   // click: () => this.$store.dispatch('logout'),
-        // },
       ];
     },
     user() {
       return this.$store.state.user;
     },
-    // logUserOut() {
-    //   let path;
-    //   if (
-    //     this.$route.path === '/createmeetup'
-    //     || this.$route.path === '/profile'
-    //   ) {
-    //     path = '/';
-    //   } else {
-    //     path = this.$route.path;
-    //   }
-    //   return path;
-    // },
+    userStateNavigation() {
+      let menuBtns;
+      if (this.user) {
+        menuBtns = this.menyBtns.filter((btn) => btn.registered);
+      } else {
+        menuBtns = this.menyBtns.filter((btn) => btn.guest);
+      }
+      return menuBtns;
+    },
   },
   methods: {
     logUserOut() {
