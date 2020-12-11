@@ -58,7 +58,7 @@
 
     <v-date-picker
       v-model="meetupDate"
-      :min="getTomorrowDay()"
+      :min="minDate"
       class="ma-1"
       width="285"
       elevation="3"
@@ -87,6 +87,9 @@
 
 <script>
 // @ is an alias to /src
+const tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate() + 1);
+const tomorrowStr = tomorrow.toISOString().substr(0, 10);
 
 export default {
   name: 'CreateMeetup',
@@ -98,12 +101,10 @@ export default {
       url: '',
     },
     description: '',
-    meetupDate: '',
+    meetupDate: tomorrowStr,
+    minDate: tomorrowStr,
     meetupTime: '09:00',
   }),
-  created() {
-    this.getDefaultMeetupDay();
-  },
   methods: {
     onUploadImgBtnClick() {
       this.$refs.uploader.click();
@@ -115,14 +116,14 @@ export default {
         this.selectedImg.url = URL.createObjectURL(this.selectedImg.img);
       }
     },
-    getTomorrowDay() {
-      const tomorrow = new Date();
-      tomorrow.setDate(tomorrow.getDate() + 1);
-      return tomorrow.toISOString().substr(0, 10);
-    },
-    getDefaultMeetupDay() {
-      this.meetupDate = this.getTomorrowDay();
-    },
+    // getTomorrowDay() {
+    //   // const tomorrow = new Date();
+    //   // tomorrow.setDate(tomorrow.getDate() + 1);
+    //   // return tomorrow.toISOString().substr(0, 10);
+    // },
+    // getDefaultMeetupDay() {
+    //   // this.meetupDate = this.getTomorrowDay();
+    // },
     createMeetup() {
       if (
         (this.title === '')
