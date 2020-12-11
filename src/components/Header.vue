@@ -11,10 +11,15 @@
         v-for="(item, i) in menyBtns"
         v-bind:key="i"
         v-bind:to="item.route"
-        @click="item.click"
       >
         <v-icon left v-html="item.icon"></v-icon>
         {{item.title}}
+      </v-btn>
+      <v-btn link text v-if="user" @click="logUserOut">
+        <v-icon>
+          login
+        </v-icon>
+        LOGOUT
       </v-btn>
     </v-toolbar-items>
   </v-app-bar>
@@ -30,51 +35,63 @@ export default {
           icon: 'supervisor_account',
           title: 'VIEW MEETUPS',
           route: '/meetups',
-          click: () => null,
         },
         {
           icon: 'location_on',
           title: 'ORGANIZE MEETUP',
           route: '/createmeetup',
-          click: () => null,
         },
         {
           icon: 'person',
           title: 'PROFILE',
           route: '/profile',
-          click: () => null,
         },
         {
           icon: 'face',
           title: 'SIGN UP',
           route: '/signup',
-          click: () => null,
         },
         {
           icon: 'lock_open',
           title: 'SIGN IN',
           route: '/signin',
-          click: () => null,
         },
-        {
-          icon: 'login',
-          title: 'LOGOUT',
-          route: this.logOutPath,
-          click: () => this.$store.dispatch('logout'),
-        },
+        // {
+        //   icon: 'login',
+        //   title: 'LOGOUT',
+        //   route: this.logOutPath,
+        //   // click: () => this.$store.dispatch('logout'),
+        // },
       ];
     },
-    logOutPath() {
-      let path;
+    user() {
+      return this.$store.state.user;
+    },
+    // logUserOut() {
+    //   let path;
+    //   if (
+    //     this.$route.path === '/createmeetup'
+    //     || this.$route.path === '/profile'
+    //   ) {
+    //     path = '/';
+    //   } else {
+    //     path = this.$route.path;
+    //   }
+    //   return path;
+    // },
+  },
+  methods: {
+    logUserOut() {
       if (
         this.$route.path === '/createmeetup'
         || this.$route.path === '/profile'
       ) {
-        path = '/';
+        this.$store.dispatch('logout');
+        this.$router.push('/');
       } else {
-        path = this.$route.path;
+        this.$store.dispatch('logout');
+        this.$router.push(this.$route.path);
       }
-      return path;
     },
   },
 };
