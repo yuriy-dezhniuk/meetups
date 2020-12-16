@@ -8,7 +8,7 @@
       <v-btn
         link
         text
-        v-for="(item, i) in userStateNavigation"
+        v-for="(item, i) in menyBtns"
         v-bind:key="i"
         v-bind:to="item.route"
       >
@@ -30,55 +30,46 @@ export default {
   name: 'Header',
   computed: {
     menyBtns() {
-      return [
+      let commonBtns = [
         {
           icon: 'supervisor_account',
           title: 'VIEW MEETUPS',
           route: '/meetups',
-          registered: true,
-          guest: true,
         },
+      ];
+      const authBtns = [
         {
           icon: 'location_on',
           title: 'ORGANIZE MEETUP',
           route: '/createmeetup',
-          registered: true,
-          guest: false,
         },
         {
           icon: 'person',
           title: 'PROFILE',
           route: '/profile',
-          registered: true,
-          guest: false,
         },
+      ];
+      const gestBtns = [
         {
           icon: 'face',
           title: 'SIGN UP',
           route: '/signup',
-          registered: false,
-          guest: true,
         },
         {
           icon: 'lock_open',
           title: 'SIGN IN',
           route: '/signin',
-          registered: false,
-          guest: true,
         },
       ];
+      if (this.user) {
+        commonBtns = commonBtns.concat(authBtns);
+      } else {
+        commonBtns = commonBtns.concat(gestBtns);
+      }
+      return commonBtns;
     },
     user() {
       return this.$store.state.user;
-    },
-    userStateNavigation() {
-      let menuBtns;
-      if (this.user) {
-        menuBtns = this.menyBtns.filter((btn) => btn.registered);
-      } else {
-        menuBtns = this.menyBtns.filter((btn) => btn.guest);
-      }
-      return menuBtns;
     },
   },
   methods: {
