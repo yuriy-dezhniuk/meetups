@@ -30,12 +30,14 @@ export default {
   name: 'Header',
   computed: {
     menyBtns() {
-      return [
+      let commonBtns = [
         {
           icon: 'supervisor_account',
           title: 'VIEW MEETUPS',
           route: '/meetups',
         },
+      ];
+      const authBtns = [
         {
           icon: 'location_on',
           title: 'ORGANIZE MEETUP',
@@ -46,6 +48,8 @@ export default {
           title: 'PROFILE',
           route: '/profile',
         },
+      ];
+      const gestBtns = [
         {
           icon: 'face',
           title: 'SIGN UP',
@@ -56,29 +60,17 @@ export default {
           title: 'SIGN IN',
           route: '/signin',
         },
-        // {
-        //   icon: 'login',
-        //   title: 'LOGOUT',
-        //   route: this.logOutPath,
-        //   // click: () => this.$store.dispatch('logout'),
-        // },
       ];
+      if (this.user) {
+        commonBtns = commonBtns.concat(authBtns);
+      } else {
+        commonBtns = commonBtns.concat(gestBtns);
+      }
+      return commonBtns;
     },
     user() {
       return this.$store.state.user;
     },
-    // logUserOut() {
-    //   let path;
-    //   if (
-    //     this.$route.path === '/createmeetup'
-    //     || this.$route.path === '/profile'
-    //   ) {
-    //     path = '/';
-    //   } else {
-    //     path = this.$route.path;
-    //   }
-    //   return path;
-    // },
   },
   methods: {
     logUserOut() {
